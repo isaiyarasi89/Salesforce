@@ -6,6 +6,7 @@
                 "referenceId": "SBQQ__ProductFeature__cRef1"
             },
             "Name": "Add-ons",
+            "SBQQ__Number__c": 10,
             "SBQQ__ConfiguredSKU__c": "@Product2Ref1"
         }
     ]
