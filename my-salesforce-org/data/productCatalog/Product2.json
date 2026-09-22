@@ -18,6 +18,15 @@
             "Name": "Post-Trade Service",
             "IsActive": true,
             "ProductCode": "PTS001"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref3"
+            },
+            "Name": "Risk Analytics",
+            "IsActive": true,
+            "ProductCode": "RAN001"
         }
     ]
 }
