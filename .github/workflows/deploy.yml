@@ -10,6 +10,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # The actual SFDX project (sfdx-project.json, force-app) lives inside
+        # this subfolder, not at the repo root - so every step below runs
+        # from here.
+        working-directory: my-salesforce-org
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
