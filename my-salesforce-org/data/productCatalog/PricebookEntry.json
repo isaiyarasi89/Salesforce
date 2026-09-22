@@ -19,6 +19,16 @@
             "Pricebook2Id": "01sd200000HDr6LAAT",
             "UnitPrice": 1000,
             "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "PricebookEntry",
+                "referenceId": "PricebookEntryRef3"
+            },
+            "Product2Id": "@Product2Ref3",
+            "Pricebook2Id": "01sd200000HDr6LAAT",
+            "UnitPrice": 100,
+            "IsActive": true
         }
     ]
 }
