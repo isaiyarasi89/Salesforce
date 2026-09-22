@@ -47,6 +47,29 @@ jobs:
       - name: Deploy metadata (real deploy)
         run: sf project deploy start --source-dir cpq-app --target-org target-org
 
+      # --- Data import, in dependency order ---
+      # ⚠️ Plan file NAMES below are my best guess based on sf's default
+      # naming pattern (<RootObjectApiName>-plan.json). Run 'ls data/*'
+      # locally first to confirm the actual names match before relying on
+      # this — if they don't, just correct the path in the matching step.
+
+      - name: "Stage 1 - Import Products and Features"
+        run: sf data import tree --plan data/productCatalog/Product2-plan.json --target-org target-org
+
+      - name: "Stage 2 - Import Product Options"
+        # Depends on Stage 1 - Options reference the Product2 records above.
+        run: sf data import tree --plan data/productCatalog/SBQQ__ProductOption__c-plan.json --target-org target-org
+
+      - name: "Stage 3 - Import Price Book Entries"
+        # Depends on Stage 1 - each entry references a Product2 record.
+        run: sf data import tree --plan data/productCatalog/PricebookEntry-plan.json --target-org target-org
+
+      - name: "Stage 4 - Import Product Rules (+ Product Actions, Error Conditions)"
+        run: sf data import tree --plan data/productRule/SBQQ__ProductRule__c-plan.json --target-org target-org
+
+      - name: "Stage 5 - Import Price Rules (+ Price Conditions, Price Actions)"
+        run: sf data import tree --plan data/priceRule/SBQQ__PriceRule__c-plan.json --target-org target-org
+
       - name: Clean up JWT key file
         if: always()
         run: rm -f server.key
