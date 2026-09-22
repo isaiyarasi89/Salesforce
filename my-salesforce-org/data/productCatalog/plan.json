@@ -1,5 +1,11 @@
 [
     {
+        "sobject": "PricebookEntry",
+        "files": [
+            "PricebookEntry.json"
+        ]
+    },
+    {
         "sobject": "SBQQ__ProductOption__c",
         "files": [
             "SBQQ__ProductOption__c.json"
