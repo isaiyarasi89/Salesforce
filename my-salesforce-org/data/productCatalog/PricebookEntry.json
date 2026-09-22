@@ -5,9 +5,19 @@
                 "type": "PricebookEntry",
                 "referenceId": "PricebookEntryRef1"
             },
-            "Product2Id": "01td200000PneZ0AAJ",
+            "Product2Id": "@Product2Ref1",
             "Pricebook2Id": "01sd200000HDr6LAAT",
             "UnitPrice": 0,
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "PricebookEntry",
+                "referenceId": "PricebookEntryRef2"
+            },
+            "Product2Id": "@Product2Ref2",
+            "Pricebook2Id": "01sd200000HDr6LAAT",
+            "UnitPrice": 1000,
             "IsActive": true
         }
     ]
