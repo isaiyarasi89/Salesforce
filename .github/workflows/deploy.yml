@@ -53,6 +53,17 @@ jobs:
       # locally first to confirm the actual names match before relying on
       # this — if they don't, just correct the path in the matching step.
 
+      - name: "Patch Price Book Entries with target org's Standard Price Book Id"
+        # The Standard Price Book exists in every org, but has a DIFFERENT
+        # record Id per org - it can't be hardcoded from the source org.
+        # This looks up the target org's own Standard Price Book Id and
+        # rewrites every PricebookEntry record to use it.
+        run: |
+          STD_PB_ID=$(sf data query --query "SELECT Id FROM Pricebook2 WHERE IsStandard = true" --target-org target-org --json | jq -r '.result.records[0].Id')
+          echo "Target org's Standard Price Book Id: $STD_PB_ID"
+          jq --arg pbid "$STD_PB_ID" '.records[].Pricebook2Id = $pbid' data/productCatalog/PricebookEntry.json > /tmp/patched.json
+          mv /tmp/patched.json data/productCatalog/PricebookEntry.json
+
       - name: "Stage 1 - Import Products, Features, Options, and Price Book Entries"
         # These must import together in one call so cross-references (Option
         # -> Product2, Price Book Entry -> Product2) resolve correctly.
