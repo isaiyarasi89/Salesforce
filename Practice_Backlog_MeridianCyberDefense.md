@@ -1,20 +1,20 @@
-# TP ICAP Practice Backlog — Source File
+# Meridian Cyber Defense — Alternate Practice Backlog
 # ============================================================
-# HOW TO ADD A NEW TASK:
-#   Copy a whole block from "## TICKET" to "## END TICKET" (inclusive),
-#   paste it at the bottom, and fill in your own TITLE / LABELS / BODY.
-#   Then run: bash sync_github_tickets.sh
-#   - New titles -> creates a new issue + adds it to your project board
-#   - Existing titles (exact match) -> updates that issue's body/labels
-#   - Nothing is ever duplicated
+# PURPOSE: Same skills/concepts as your TP ICAP backlog, different company,
+# products, and numbers — so you practice reasoning through the CPQ/Revenue
+# Cloud logic fresh instead of recalling memorized answers.
+#
+# This is a SEPARATE file from TPICAP_Backlog_Source.md. If you want these
+# synced as GitHub issues too, merge the tickets you want into your main
+# source file and run: bash sync_github_tickets.sh
 # ============================================================
 
 ## TICKET
-TITLE: Day 1 (CPQ): Build TP ICAP-style product catalogue (bundle + options)
-LABELS: track:cpq,area:product-config,difficulty:beginner,sprint:1
+TITLE: Day 1 (CPQ): Build Meridian-style product catalogue (bundle + options)
+LABELS: track:cpq,area:product-config,difficulty:beginner,sprint:alt-1
 BODY:
 ## Business Requirement
-InterBroke Markets sells three product lines: Market Data Subscriptions, Voice Broking Services, and Post-Trade/Risk Services. A sales rep needs to quote "Market Data – EMEA Tier 2" with an optional Post-Trade add-on, and the option list should change depending on the client's region.
+Meridian Cyber Defense sells three product lines: Threat Intelligence Feeds, Managed SOC Monitoring, and Incident Response Retainers. A sales rep needs to quote "Threat Intelligence Feed – Enterprise Tier" with an optional Incident Response add-on, and the option list should change depending on the client's data-residency region.
 
 ## Skills Being Tested
 - Product2 / bundle structure
@@ -22,47 +22,47 @@ InterBroke Markets sells three product lines: Market Data Subscriptions, Voice B
 - Configuration Attributes
 
 ## Task
-1. Create Product2 records: Market Data Subscription (bundle parent), Voice Broking Service, Post-Trade Service, Risk Analytics Add-on.
-2. Add a Feature "Add-ons" containing Post-Trade Service and Risk Analytics Add-on as Options.
-3. Add a Configuration Attribute Region (picklist: UK, US, APAC).
+1. Create Product2 records: Threat Intelligence Feed (bundle parent), Managed SOC Monitoring, Incident Response Retainer, Dark Web Monitoring Add-on.
+2. Add a Feature "Add-ons" containing Incident Response Retainer and Dark Web Monitoring Add-on as Options.
+3. Add a Configuration Attribute "Coverage Region" (picklist: North America, EU, APAC).
 4. Ensure Price Book entries exist for every product.
 
 ## Acceptance Criteria
-- [ ] Market Data Subscription exists as an active bundle Product2
-- [ ] Post-Trade Service and Risk Analytics Add-on are Options under the Feature
-- [ ] Region Configuration Attribute is visible on the configuration screen
+- [ ] Threat Intelligence Feed exists as an active bundle Product2
+- [ ] Incident Response Retainer and Dark Web Monitoring Add-on are Options under the Feature
+- [ ] Coverage Region Configuration Attribute is visible on the configuration screen
 - [ ] All products have an active Price Book Entry
-- [ ] Adding the bundle to a Quote opens configuration showing Options and Region
+- [ ] Adding the bundle to a Quote opens configuration showing Options and Coverage Region
 
 ## Test Scenarios
-1. Add the bundle to a Quote, confirm Options and Region attribute are visible.
-2. Set Region = UK, select Post-Trade Service, save, confirm child Quote Line is created.
-3. Change Region to APAC, reopen configuration, note option visibility.
+1. Add the bundle to a Quote, confirm Options and Coverage Region attribute are visible.
+2. Set Coverage Region = EU, select Incident Response Retainer, save, confirm child Quote Line is created.
+3. Change Coverage Region to APAC, reopen configuration, note option visibility.
 
 ## Interview Prep
-"Walk me through how you modelled a bundled product with regional variants."
+"Walk me through how you modelled a bundled product with regional variants." (Practice answering this using Meridian's structure without referencing your notes from the TP ICAP version.)
 ## END TICKET
 
 ## TICKET
-TITLE: Day 1 (Revenue Cloud): Product Catalog Management equivalent
-LABELS: track:revenue-cloud,area:product-config,difficulty:beginner,sprint:1
+TITLE: Day 1 (Revenue Cloud): Product Catalog Management equivalent — Meridian
+LABELS: track:revenue-cloud,area:product-config,difficulty:beginner,sprint:alt-1
 BODY:
 ## Business Requirement
 Same bundle as the CPQ version, rebuilt using Revenue Cloud's attribute-based Product Catalog Management.
 
 ## Task
 1. Create the same four products in Revenue Cloud.
-2. Model "Add-ons" and "Region" as Attribute Definitions under a Product Classification instead of CPQ Feature/Option.
+2. Model "Add-ons" and "Coverage Region" as Attribute Definitions under a Product Classification instead of CPQ Feature/Option.
 3. Confirm they render on the Transaction Line Editor.
 
 ## Acceptance Criteria
 - [ ] Products have a Product Classification assigned
-- [ ] Region and Add-ons are modelled as Attribute Definitions
+- [ ] Coverage Region and Add-ons are modelled as Attribute Definitions
 - [ ] Transaction Line Editor shows the attributes when the product is added
 - [ ] You can map CPQ Feature/Option -> Revenue Cloud Attribute Definition + Product Classification
 
 ## Test Scenarios
-1. Add the product to a Quote/Transaction, confirm the attribute picker shows Region and Add-ons.
+1. Add the product to a Quote/Transaction, confirm the attribute picker shows Coverage Region and Add-ons.
 2. Select values and confirm they save to the transaction line.
 
 ## Interview Prep
@@ -70,74 +70,74 @@ Same bundle as the CPQ version, rebuilt using Revenue Cloud's attribute-based Pr
 ## END TICKET
 
 ## TICKET
-TITLE: Day 2 (CPQ): Region-based Product Rule restricting Post-Trade add-on
-LABELS: track:cpq,area:product-config,difficulty:intermediate,sprint:1
+TITLE: Day 2 (CPQ): Region-based Product Rule restricting Incident Response add-on
+LABELS: track:cpq,area:product-config,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
-Post-Trade Service can only be sold in UK/EMEA for regulatory reasons; APAC reps must be blocked with a clear message.
+Incident Response Retainer requires on-site staff presence Meridian only has in North America and the EU; APAC reps must be blocked with a clear message due to lack of coverage.
 
 ## Task
 1. Create a Validation Product Rule scoped to the bundle.
-2. Error Condition: Region = APAC AND Post-Trade Service selected.
+2. Error Condition: Coverage Region = APAC AND Incident Response Retainer selected.
 3. (Advanced) Add a Filter Rule to hide the option entirely for APAC instead of erroring.
 
 ## Acceptance Criteria
 - [ ] Validation Rule exists and is active
-- [ ] Error Condition correctly evaluates Region = APAC AND Post-Trade selected
+- [ ] Error Condition correctly evaluates Coverage Region = APAC AND Incident Response selected
 - [ ] Saving in that state is blocked with a clear message
-- [ ] UK/US + Post-Trade saves successfully
+- [ ] NA/EU + Incident Response saves successfully
 - [ ] You can explain Validation Rule vs Filter Rule
 
 ## Test Scenarios
-1. Region = APAC + Post-Trade selected -> expect blocking error.
-2. Region = UK + Post-Trade selected -> expect success.
-3. Region = APAC, Post-Trade removed -> expect success.
+1. Coverage Region = APAC + Incident Response selected -> expect blocking error.
+2. Coverage Region = EU + Incident Response selected -> expect success.
+3. Coverage Region = APAC, Incident Response removed -> expect success.
 
 ## Interview Prep
-This maps to your real TP ICAP project — verify before answering: did you use a Validation Rule, Filter Rule, or both? What was the actual business reason?
+Compare this to your TP ICAP Region Product Rule: same underlying pattern (region-based exclusion), different business driver (staff coverage vs. regulatory restriction). Can you articulate both business reasons clearly and not conflate them?
 ## END TICKET
 
 ## TICKET
-TITLE: Day 2 (Revenue Cloud): Product Qualification/Eligibility rule equivalent
-LABELS: track:revenue-cloud,area:product-config,difficulty:intermediate,sprint:1
+TITLE: Day 2 (Revenue Cloud): Product Qualification/Eligibility rule equivalent — Meridian
+LABELS: track:revenue-cloud,area:product-config,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
 Same restriction as the CPQ version, using Revenue Cloud's eligibility/qualification framework.
 
 ## Task
-1. Create a Qualification/Eligibility Rule excluding Post-Trade Service when Region = APAC.
+1. Create a Qualification/Eligibility Rule excluding Incident Response Retainer when Coverage Region = APAC.
 2. Attach it to the relevant Product Selling Model / Price Book.
 
 ## Acceptance Criteria
-- [ ] Rule exists and references Region = APAC
-- [ ] Post-Trade Service does not appear when Region = APAC
-- [ ] Post-Trade Service is sellable when Region = UK/US
+- [ ] Rule exists and references Coverage Region = APAC
+- [ ] Incident Response Retainer does not appear when Coverage Region = APAC
+- [ ] Incident Response Retainer is sellable when Coverage Region = NA/EU
 - [ ] You can explain how this differs from a CPQ Product Rule in evaluation timing
 
 ## Test Scenarios
-1. New transaction, Region = APAC -> Post-Trade excluded from product list.
-2. Region = UK -> Post-Trade becomes available.
+1. New transaction, Coverage Region = APAC -> Incident Response excluded from product list.
+2. Coverage Region = EU -> Incident Response becomes available.
 
 ## Interview Prep
 "How do Revenue Cloud eligibility rules compare to CPQ Product Rules in terms of when they're evaluated?"
 ## END TICKET
 
 ## TICKET
-TITLE: Day 3 (CPQ): Contracted & tiered pricing for Market Data
-LABELS: track:cpq,area:pricing,difficulty:intermediate,sprint:1
+TITLE: Day 3 (CPQ): Contracted & tiered pricing for Threat Intelligence Feeds
+LABELS: track:cpq,area:pricing,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
-Market Data pricing varies by tier (Tier 1 £500/mo, Tier 2 £350/mo, Tier 3 £200/mo); large clients negotiate a Contracted Price.
+Threat Intelligence Feed pricing varies by tier (Enterprise $800/mo, Growth $550/mo, Starter $300/mo); large clients negotiate a Contracted Price.
 
 ## Task
 1. Create three tiered Price Book Entries.
-2. Build a volume Discount Schedule (5+ units = 5%, 20+ = 10%).
-3. Create a Contract with a Contracted Price for Tier 2 below list.
+2. Build a volume Discount Schedule (6+ units = 6%, 20+ = 12%).
+3. Create a Contract with a Contracted Price for Growth tier below list.
 4. Quote for that Account and confirm the contracted price applies automatically.
 
 ## Acceptance Criteria
 - [ ] Three tiered Price Book Entries exist
-- [ ] Discount Schedule triggers correctly at 4 vs 5 vs 20 units
+- [ ] Discount Schedule triggers correctly at 5 vs 6 vs 20 units
 - [ ] Contracted Price exists on the test Account/Contract
 - [ ] New Quote defaults to contracted price, not list price
 - [ ] You can state the full price waterfall: List -> Special -> Discount -> Contracted/Customer -> Net
@@ -145,15 +145,15 @@ Market Data pricing varies by tier (Tier 1 £500/mo, Tier 2 £350/mo, Tier 3 £2
 ## Test Scenarios
 1. Quote without contract -> list price used.
 2. Quote with contract -> contracted price overrides list.
-3. Add 5 units without contract -> 5% discount tier applies.
+3. Add 6 units without contract -> 6% discount tier applies.
 
 ## Interview Prep
-"Explain the price waterfall in CPQ using a real example." Flag illustrative numbers vs confirmed TP ICAP figures.
+"Explain the price waterfall in CPQ using a real example." Try explaining it with Meridian's numbers cold, without glancing at your TP ICAP version first — that's the real test of whether you understand the waterfall or just memorized one example.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 3 (Revenue Cloud): Price Books + Pricing Procedure equivalent
-LABELS: track:revenue-cloud,area:pricing,difficulty:intermediate,sprint:1
+TITLE: Day 3 (Revenue Cloud): Price Books + Pricing Procedure equivalent — Meridian
+LABELS: track:revenue-cloud,area:pricing,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
 Recreate Day 3 CPQ pricing using Revenue Cloud's pricing engine.
@@ -165,7 +165,7 @@ Recreate Day 3 CPQ pricing using Revenue Cloud's pricing engine.
 
 ## Acceptance Criteria
 - [ ] Price Book has correct tiered pricing
-- [ ] Price Adjustment Schedule matches the 4 vs 5 vs 20 unit breakpoints
+- [ ] Price Adjustment Schedule matches the 5 vs 6 vs 20 unit breakpoints
 - [ ] Pricing Procedure produces the same net price as the CPQ scenario for identical inputs
 - [ ] You can map each CPQ pricing concept to its Revenue Cloud equivalent
 
@@ -177,47 +177,47 @@ Repeat the three CPQ test cases in Revenue Cloud and confirm matching output pri
 ## END TICKET
 
 ## TICKET
-TITLE: Day 4 (CPQ): Annual 5% price increase at renewal, excluding fixed contracts
-LABELS: track:cpq,area:pricing,area:contracts-renewals,difficulty:advanced,sprint:1
+TITLE: Day 4 (CPQ): Annual 7% price increase at renewal, excluding fixed contracts
+LABELS: track:cpq,area:pricing,area:contracts-renewals,difficulty:advanced,sprint:alt-1
 BODY:
 ## Business Requirement
-All Market Data subscriptions get a 5% annual uplift at renewal, except clients on a 3-year fixed-price contract.
+All Threat Intelligence Feed subscriptions get a 7% annual uplift at renewal, except clients on a 3-year fixed-price contract.
 
 ## Task
-1. Set up a subscription at £100 with an active Contract.
+1. Set up a subscription at $200/mo with an active Contract.
 2. Generate a Renewal Opportunity and Renewal Quote.
-3. Apply 5% uplift via a Price Rule.
+3. Apply 7% uplift via a Price Rule.
 4. Add a second Account flagged fixed-price and confirm exclusion.
-5. Verify compounding: Year 1 £100 -> Year 2 £105 -> Year 3 £110.25.
+5. Verify compounding: Year 1 $200 -> Year 2 $214.00 -> Year 3 $228.98.
 
 ## Acceptance Criteria
 - [ ] Renewal Quote generates correctly from the expiring Subscription
-- [ ] Standard renewal shows 5% increase over prior contracted price
+- [ ] Standard renewal shows 7% increase over prior contracted price
 - [ ] Fixed-price renewal shows NO change
-- [ ] Compounding math correct across 3 years
-- [ ] You've identified (or flagged "to verify") whether your real project used a Price Rule, batch Apex, or manual updates
+- [ ] Compounding math correct across 3 years (200 -> 214.00 -> 228.98)
+- [ ] You can explain whether uplift should be automatic (batch/Price Rule) or manual, and the trade-offs of each
 
 ## Test Scenarios
-1. Renew standard subscription -> new price = old x 1.05.
+1. Renew standard subscription -> new price = old x 1.07.
 2. Renew fixed-price subscription -> unchanged.
-3. Run 3 consecutive annual renewals -> confirm compounding, not flat 5% off original base.
+3. Run 3 consecutive annual renewals -> confirm compounding, not flat 7% off original base.
 
 ## Interview Prep
-⚠️ Real project area — verify before presenting as fact. Was uplift automatic or manual? Was there a batch job? Was the % set per-product, per-client, or company-wide?
+Notice the percentage is different from your TP ICAP example (7% vs 5%) — recompute the compounding by hand first before checking your work, to make sure you actually understand the math rather than recalling a memorized figure.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 4 (Revenue Cloud): Renewal/Amendment uplift equivalent
-LABELS: track:revenue-cloud,area:pricing,area:contracts-renewals,difficulty:advanced,sprint:1
+TITLE: Day 4 (Revenue Cloud): Renewal/Amendment uplift equivalent — Meridian
+LABELS: track:revenue-cloud,area:pricing,area:contracts-renewals,difficulty:advanced,sprint:alt-1
 BODY:
 ## Business Requirement
 Recreate the annual uplift scenario using Revenue Cloud's Asset-based Ordering renewal/amendment model.
 
 ## Task
-1. Create an Asset representing the £100 subscription.
-2. Trigger a Renewal transaction, apply 5% uplift via Pricing Procedure or manual amendment.
+1. Create an Asset representing the $200/mo subscription.
+2. Trigger a Renewal transaction, apply 7% uplift via Pricing Procedure or manual amendment.
 3. Exclude a fixed-price Asset from the uplift.
-4. Verify the same 3-year compounding numbers.
+4. Verify the same 3-year compounding numbers ($200 -> $214.00 -> $228.98).
 
 ## Acceptance Criteria
 - [ ] Asset correctly represents the subscription pre-renewal
@@ -234,11 +234,11 @@ Same three scenarios as the CPQ version, run against Assets.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 5 (CPQ+Billing): Subscription to Invoice flow
-LABELS: track:cpq,area:billing-invoicing,difficulty:intermediate,sprint:1
+TITLE: Day 5 (CPQ+Billing): Subscription to Invoice flow — Meridian
+LABELS: track:cpq,area:billing-invoicing,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
-Once a Market Data subscription quote is signed, it must generate recurring monthly invoices.
+Once a Threat Intelligence Feed subscription quote is signed, it must generate recurring monthly invoices.
 
 ## Task
 1. Take a signed Quote through to Contract and Subscription.
@@ -255,15 +255,15 @@ Once a Market Data subscription quote is signed, it must generate recurring mont
 2. Trace one product from Quote Line to Invoice Line (or documented equivalent).
 
 ## Interview Prep
-"How did quote-to-cash flow from Quote to Invoice in your implementation?" Confirm whether TP ICAP used Salesforce Billing, a third-party system, or manual invoicing before answering.
+"How did quote-to-cash flow from Quote to Invoice in your implementation?" Practice this answer for Meridian's flow first, then compare to how you'd describe TP ICAP's actual (or unconfirmed) process — keep the two clearly separated in your head.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 5 (Revenue Cloud): Native Billing - Invoice + usage-based option
-LABELS: track:revenue-cloud,area:billing-invoicing,difficulty:intermediate,sprint:1
+TITLE: Day 5 (Revenue Cloud): Native Billing - Invoice + usage-based option — Meridian
+LABELS: track:revenue-cloud,area:billing-invoicing,difficulty:intermediate,sprint:alt-1
 BODY:
 ## Business Requirement
-Recreate invoicing using Revenue Cloud native Billing, plus a usage-based variant for Market Data (billed per feed consumed).
+Recreate invoicing using Revenue Cloud native Billing, plus a usage-based variant for Incident Response (billed per response hour consumed).
 
 ## Task
 1. Set up a Billing Treatment and Invoice Schedule against the Asset.
@@ -278,30 +278,29 @@ Recreate invoicing using Revenue Cloud native Billing, plus a usage-based varian
 
 ## Test Scenarios
 1. Generate flat-fee invoice, confirm amount.
-2. Apply sample usage (e.g. 1,200 feed accesses at £0.05 each), confirm invoice reflects consumption.
+2. Apply sample usage (e.g. 40 response hours at $150/hour), confirm invoice reflects consumption.
 
 ## Interview Prep
 "What billing models does Revenue Cloud support that CPQ+Billing couldn't handle as natively?"
 ## END TICKET
 
 ## TICKET
-TITLE: Day 6 (CPQ): MDQ multi-year quote for a 3-year Market Data deal
-LABELS: track:cpq,area:mdq,area:pricing,difficulty:advanced,sprint:2
+TITLE: Day 6 (CPQ): MDQ multi-year quote for a 3-year SOC Monitoring deal
+LABELS: track:cpq,area:mdq,area:pricing,difficulty:advanced,sprint:alt-2
 BODY:
 ## Business Requirement
-A large client wants to sign a single 3-year deal for Market Data Subscriptions, with a different quantity of feeds each year (Year 1: 50 feeds, Year 2: 75 feeds, Year 3: 100 feeds) and a negotiated discount that increases each year as volume grows.
+A large client wants to sign a single 3-year deal for Managed SOC Monitoring, with a different number of monitored endpoints each year (Year 1: 30 endpoints, Year 2: 60 endpoints, Year 3: 90 endpoints) and a negotiated discount that increases each year as volume grows.
 
 ## Skills Being Tested
 - MDQ product setup (enabling a product for Multi-Dimensional Quoting)
 - Segments (year-by-year breakdown of a single Quote Line)
 - Year-by-year quantity and discount entry
-- Multi-year Subscription Term configuration
 
 ## Task
-1. Enable the Market Data Subscription product for MDQ (multi-dimensional quoting).
+1. Enable Managed SOC Monitoring for MDQ.
 2. Add it to a Quote with a 3-year Subscription Term and confirm it splits into 3 Segments.
-3. Set Segment 1 quantity = 50, Segment 2 = 75, Segment 3 = 100.
-4. Apply increasing discounts per segment (e.g. 5%, 8%, 10%).
+3. Set Segment 1 quantity = 30, Segment 2 = 60, Segment 3 = 90.
+4. Apply increasing discounts per segment (4%, 7%, 10%).
 5. Confirm the Quote total correctly sums all three segments.
 
 ## Acceptance Criteria
@@ -309,7 +308,7 @@ A large client wants to sign a single 3-year deal for Market Data Subscriptions,
 - [ ] Quote Line splits into exactly 3 Segments matching the 3-year term
 - [ ] Each Segment holds its own quantity and discount independently
 - [ ] Total quote value reflects the sum of all 3 segments at their respective net prices
-- [ ] You can explain what happens to Segments at renewal (do they carry forward, regenerate, or need manual re-entry?)
+- [ ] You can explain what happens to Segments at renewal
 
 ## Test Scenarios
 1. Change Segment 2's quantity only — confirm Segment 1 and 3 are unaffected.
@@ -317,26 +316,26 @@ A large client wants to sign a single 3-year deal for Market Data Subscriptions,
 3. Generate a quote document/PDF and confirm segment-level detail appears (or note if it only shows a summary).
 
 ## Interview Prep
-⚠️ Real project area — verify before presenting as fact. On your actual MDQ implementation: did segments represent years, quarters, or something else? Was the discount pattern per-segment or a single schedule applied across all segments? Did you use Quote Line Groups alongside MDQ, or was MDQ used standalone?
+Compare the mechanics here to your TP ICAP MDQ recollection — same Segment structure, different quantities/discounts. Does explaining it with new numbers feel as natural as with the original ones? If not, that's a sign to drill the underlying mechanic rather than the specific figures.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 6 (Revenue Cloud): Ramp deal / multi-year quoting equivalent
-LABELS: track:revenue-cloud,area:mdq,area:pricing,difficulty:advanced,sprint:2
+TITLE: Day 6 (Revenue Cloud): Ramp deal / multi-year quoting equivalent — Meridian
+LABELS: track:revenue-cloud,area:mdq,area:pricing,difficulty:advanced,sprint:alt-2
 BODY:
 ## Business Requirement
-Recreate the same 3-year ramping Market Data deal using Revenue Cloud's approach to multi-year, multi-quantity transactions.
+Recreate the same 3-year ramping SOC Monitoring deal using Revenue Cloud's approach to multi-year, multi-quantity transactions.
 
 ## Task
-1. Research and identify Revenue Cloud's equivalent mechanism for year-by-year quantity/price variation on one product (this may involve Transaction Line structures, Ramp deals, or Pricing Procedures applied per period — confirm current mechanism rather than assuming it matches CPQ's Segment model).
-2. Rebuild the same 50/75/100 feed ramp with increasing discount.
+1. Identify Revenue Cloud's current mechanism for year-by-year quantity/price variation on one product (confirm rather than assume it matches CPQ's Segment model).
+2. Rebuild the same 30/60/90 endpoint ramp with increasing discount.
 3. Confirm the transaction total matches the CPQ version exactly for the same inputs.
 
 ## Acceptance Criteria
 - [ ] You've identified how Revenue Cloud represents a ramping multi-year quantity/price scenario
-- [ ] The 3-year structure is represented correctly (however Revenue Cloud models it)
+- [ ] The 3-year structure is represented correctly
 - [ ] Total value matches the CPQ scenario exactly
-- [ ] You can clearly explain, in your own words, how this differs structurally from CPQ's Segment-based MDQ
+- [ ] You can clearly explain how this differs structurally from CPQ's Segment-based MDQ
 
 ## Test Scenarios
 Repeat the three CPQ test scenarios (change one period, shorten the term, generate a document) and confirm equivalent behavior.
@@ -346,11 +345,11 @@ Repeat the three CPQ test scenarios (change one period, shorten the term, genera
 ## END TICKET
 
 ## TICKET
-TITLE: Day 7 (CPQ): Conga quote template with conditional sections
-LABELS: track:cpq,area:document-generation,difficulty:intermediate,sprint:2
+TITLE: Day 7 (CPQ): Conga quote template with conditional sections — Meridian
+LABELS: track:cpq,area:document-generation,difficulty:intermediate,sprint:alt-2
 BODY:
 ## Business Requirement
-The generated quote PDF for InterBroke Markets needs to show a Post-Trade Services table ONLY when that product is on the quote, include a standard T&Cs section always, and merge in customer, pricing, and rep details automatically.
+The generated quote PDF for Meridian needs to show an Incident Response Retainer table ONLY when that product is on the quote, include a standard SLA/T&Cs section always, and merge in customer, pricing, and rep details automatically.
 
 ## Skills Being Tested
 - Conga template structure and merge fields
@@ -358,34 +357,34 @@ The generated quote PDF for InterBroke Markets needs to show a Post-Trade Servic
 - Mapping Salesforce/CPQ data into a generated document
 
 ## Task
-1. Build (or reconstruct on paper if Conga isn't available in your dev org) a quote template with: header merge fields (Account Name, Quote Number, Rep Name), a Quote Line table, and a conditional Post-Trade Services section.
-2. Configure the conditional logic so that section only renders when a Post-Trade Service Quote Line exists.
-3. Generate a test document from two quotes — one with Post-Trade, one without — and confirm the section appears/disappears correctly.
+1. Build (or reconstruct on paper) a quote template with: header merge fields (Account Name, Quote Number, Rep Name), a Quote Line table, and a conditional Incident Response section.
+2. Configure the conditional logic so that section only renders when an Incident Response Retainer Quote Line exists.
+3. Generate a test document from two quotes — one with Incident Response, one without — and confirm the section appears/disappears correctly.
 
 ## Acceptance Criteria
 - [ ] Template correctly merges Account, Quote, and Rep-level fields
 - [ ] Quote Line table renders all lines with correct pricing
-- [ ] Conditional Post-Trade section appears only when that product is present
-- [ ] You can explain, at a technical level, how Conga decides what data to pull (query/mapping vs. direct merge field)
+- [ ] Conditional Incident Response section appears only when that product is present
+- [ ] You can explain, at a technical level, how Conga decides what data to pull
 
 ## Test Scenarios
-1. Generate from a quote with Post-Trade Service — confirm section appears.
+1. Generate from a quote with Incident Response Retainer — confirm section appears.
 2. Generate from a quote without it — confirm section is absent, not just empty.
-3. Change a Quote Line quantity and regenerate — confirm the document reflects the update (not a cached version).
+3. Change a Quote Line quantity and regenerate — confirm the document reflects the update.
 
 ## Interview Prep
-⚠️ Real project area — verify before presenting as fact. Did your Conga templates use conditional sections like this, or was the conditional logic handled differently (e.g. separate templates per scenario)? Was Conga triggered manually by the rep or via a Flow/button?
+Same structural question as your TP ICAP Conga ticket, different trigger product — good test of whether you understand "conditional section logic" as a concept vs. one specific remembered setup.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 7 (Revenue Cloud): Native document generation equivalent
-LABELS: track:revenue-cloud,area:document-generation,difficulty:intermediate,sprint:2
+TITLE: Day 7 (Revenue Cloud): Native document generation equivalent — Meridian
+LABELS: track:revenue-cloud,area:document-generation,difficulty:intermediate,sprint:alt-2
 BODY:
 ## Business Requirement
 Recreate the same conditional quote document using Revenue Cloud/core Salesforce document generation tools instead of Conga.
 
 ## Task
-1. Identify what document generation options exist for Revenue Cloud transactions (this may involve Salesforce's native quote document tools, OmniStudio-style document generation, or a still-supported Conga/DocuSign integration — confirm current options rather than assuming).
+1. Identify what document generation options currently exist for Revenue Cloud transactions.
 2. Rebuild the same conditional-section logic.
 3. Compare setup complexity and flexibility against the Conga approach.
 
@@ -395,18 +394,18 @@ Recreate the same conditional quote document using Revenue Cloud/core Salesforce
 - [ ] You can articulate at least one meaningful trade-off between the Conga/CPQ approach and the Revenue Cloud approach
 
 ## Test Scenarios
-Repeat the same two-quote test (with/without Post-Trade) as the CPQ version.
+Repeat the same two-quote test (with/without Incident Response) as the CPQ version.
 
 ## Interview Prep
 "If a client didn't want to keep paying for Conga, what native options would you point them to under Revenue Cloud?"
 ## END TICKET
 
 ## TICKET
-TITLE: Day 8 (CPQ): Diagnose a broken auto-renewal batch
-LABELS: track:cpq,area:contracts-renewals,area:troubleshooting,difficulty:advanced,sprint:2
+TITLE: Day 8 (CPQ): Diagnose a broken auto-renewal batch — Meridian
+LABELS: track:cpq,area:contracts-renewals,area:troubleshooting,difficulty:advanced,sprint:alt-2
 BODY:
 ## Business Requirement
-Several Market Data subscriptions due for renewal next month have NOT generated Renewal Opportunities or Renewal Quotes, even though the Contract's Auto-Renewal fields look correctly set.
+Several Threat Intelligence Feed subscriptions due for renewal next month have NOT generated Renewal Opportunities or Renewal Quotes, even though the Contract's Auto-Renewal fields look correctly set.
 
 ## Skills Being Tested
 - Contract/Subscription renewal fields (Auto-Renew, Renewal Term, Renewal Quoted status)
@@ -416,10 +415,10 @@ Several Market Data subscriptions due for renewal next month have NOT generated 
 ## Task
 1. Deliberately break a test renewal scenario in your dev org — e.g. set an Auto-Renewal-eligible Contract but leave the Renewal Quoted checkbox in a conflicting state, or misconfigure the Contract End Date relative to the renewal batch's lookback window.
 2. Investigate: check Setup > Scheduled Jobs for the CPQ renewal batch, check the Subscription's renewal-related fields, check for any Validation Rules or Flows that might silently block renewal record creation.
-3. Document a step-by-step diagnostic path you'd follow in production (not just in this test case).
+3. Document a step-by-step diagnostic path you'd follow in production.
 
 ## Acceptance Criteria
-- [ ] You've identified at least 2 realistic root causes for a stalled auto-renewal (e.g. batch not scheduled, Renewal Quoted already true blocking regeneration, Contract dates outside the lookback window, a Validation Rule blocking Opportunity creation)
+- [ ] You've identified at least 2 realistic root causes for a stalled auto-renewal
 - [ ] You have a clear, ordered diagnostic checklist you could describe out loud in an interview
 - [ ] You can distinguish "configuration problem" from "data problem" from "automation/code problem" as separate diagnostic branches
 
@@ -428,15 +427,15 @@ Several Market Data subscriptions due for renewal next month have NOT generated 
 2. Break it a different way (pick a different root cause) and re-run your checklist to confirm it still finds the issue.
 
 ## Interview Prep
-Does this sound like something that happened in your project — a renewal that silently failed to generate? If yes, what was the actual cause you found at TP ICAP? If you don't fully remember, we can build the STAR story around the diagnostic process itself rather than a specific remembered root cause.
+Run through this diagnostic checklist verbally, out loud, without looking at the TP ICAP version — this tests whether you've internalized the troubleshooting process itself.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 8 (Admin): Diagnose a user access/permission issue
-LABELS: track:admin,area:security,difficulty:intermediate,sprint:2
+TITLE: Day 8 (Admin): Diagnose a user access/permission issue — Meridian
+LABELS: track:admin,area:security,difficulty:intermediate,sprint:alt-2
 BODY:
 ## Business Requirement
-A newly onboarded sales rep can see Accounts but cannot create Quotes or view Price Book Entries, despite being assigned what looks like the correct Profile.
+A newly onboarded SOC analyst can see Accounts but cannot create Quotes or view Price Book Entries, despite being assigned what looks like the correct Profile.
 
 ## Skills Being Tested
 - Profiles vs Permission Sets
@@ -457,46 +456,46 @@ A newly onboarded sales rep can see Accounts but cannot create Quotes or view Pr
 ## Test Scenarios
 1. Confirm the test user is blocked before the fix.
 2. Assign the Permission Set, confirm access without a Profile change.
-3. Remove the Permission Set again, confirm access is revoked — proving the Permission Set (not something else) was responsible.
+3. Remove the Permission Set again, confirm access is revoked.
 
 ## Interview Prep
 "Walk me through how you'd investigate a 'user can't see X' ticket, step by step, before touching anything."
 ## END TICKET
 
 ## TICKET
-TITLE: Day 9 (Admin/DevOps): Deploy a CPQ Product Rule two ways — Change Set vs Git/SFDX
-LABELS: track:admin,area:deployment,difficulty:intermediate,sprint:2
+TITLE: Day 9 (Admin/DevOps): Deploy a CPQ Product Rule two ways — Change Set vs Git/SFDX — Meridian
+LABELS: track:admin,area:deployment,difficulty:intermediate,sprint:alt-2
 BODY:
 ## Business Requirement
-You need to move a completed Product Rule (built in Day 2's exercise) from your dev org into a second sandbox/scratch org, and be able to explain both the traditional Change Set method and the modern Git/SFDX method.
+You need to move a completed Product Rule (built in the Day 2 Meridian exercise) from your dev org into a second sandbox/scratch org, and be able to explain both the traditional Change Set method and the modern Git/SFDX method.
 
 ## Skills Being Tested
-- Outbound/Inbound Change Sets (your historical experience)
-- sf CLI metadata retrieve/deploy and sf data export/import tree (your current learning)
+- Outbound/Inbound Change Sets
+- sf CLI metadata retrieve/deploy and sf data export/import tree
 - Understanding what's metadata vs what's data in this specific deployment
 
 ## Task
-1. If you have two connected orgs available: deploy the Product Rule's metadata dependencies (if any custom fields/Flows were involved) via Outbound Change Set, the traditional way.
-2. Separately, use `sf project retrieve` for any metadata and `sf data export tree` / `sf data import tree` for the actual Product Rule + Product Action + Error Condition records, deploying to the same or a different target org.
-3. Write a short comparison of the two approaches: what's manual vs automatable, what's trackable in version history, what's more error-prone.
+1. If you have two connected orgs available: deploy the Product Rule's metadata dependencies via Outbound Change Set.
+2. Separately, use `sf project retrieve` for any metadata and `sf data export tree` / `sf data import tree` for the actual Product Rule + Product Action + Error Condition records.
+3. Write a short comparison of the two approaches.
 
 ## Acceptance Criteria
-- [ ] You've completed (or clearly documented, if a second org isn't available) both deployment paths
+- [ ] You've completed (or clearly documented) both deployment paths
 - [ ] You can name specifically which parts of a Product Rule are metadata vs data
-- [ ] You can explain, without notes, why Change Sets don't version-control anything while Git does
-- [ ] You have a working, committed Git artifact from this exercise (ties into your earlier Git setup)
+- [ ] You can explain why Change Sets don't version-control anything while Git does
+- [ ] You have a working, committed Git artifact from this exercise
 
 ## Test Scenarios
 1. Confirm the Product Rule and its children exist correctly in the target org after each method.
-2. Deliberately omit a required field in the data export plan and confirm the import fails clearly — practice reading the error.
+2. Deliberately omit a required field in the data export plan and confirm the import fails clearly.
 
 ## Interview Prep
 "You've used Change Sets in production — how would you explain the shift to source-driven deployment to a team that's never done it?"
 ## END TICKET
 
 ## TICKET
-TITLE: Day 9 (Reporting): Sales Rep Performance Leaderboard rebuild
-LABELS: track:admin,area:reporting,difficulty:beginner,sprint:2
+TITLE: Day 9 (Reporting): Sales Rep Performance Leaderboard rebuild — Meridian
+LABELS: track:admin,area:reporting,difficulty:beginner,sprint:alt-2
 BODY:
 ## Business Requirement
 Sales leadership wants a live leaderboard showing each rep's closed-won Quote value this quarter, ranked highest to lowest, to support an incentive program.
@@ -507,14 +506,14 @@ Sales leadership wants a live leaderboard showing each rep's closed-won Quote va
 - Dashboard components and sharing/visibility
 
 ## Task
-1. Build a report on closed-won Quotes (or Opportunities, if that's the more natural object) grouped by Owner, summarizing total Net Amount.
+1. Build a report on closed-won Quotes (or Opportunities) grouped by Owner, summarizing total Net Amount.
 2. Sort/rank so the top performer appears first.
-3. Add a filter for "this quarter" (relative date filter, not hardcoded dates).
-4. Build a simple dashboard component (bar chart or table) from the report and set appropriate sharing so reps can see the leaderboard but not edit underlying data.
+3. Add a filter for "this quarter" (relative date filter).
+4. Build a simple dashboard component from the report and set appropriate sharing.
 
 ## Acceptance Criteria
 - [ ] Report correctly groups by rep and sums the right amount field
-- [ ] Relative date filter correctly scopes to the current quarter (test by checking it updates automatically vs a fixed date range)
+- [ ] Relative date filter correctly scopes to the current quarter
 - [ ] Dashboard component displays and ranks correctly
 - [ ] Sharing is view-only for the intended audience
 
@@ -524,12 +523,12 @@ Sales leadership wants a live leaderboard showing each rep's closed-won Quote va
 3. Log in as a restricted test user and confirm they can view but not edit the report/dashboard.
 
 ## Interview Prep
-This maps to your real leaderboard report at TP ICAP — verify before answering: was it built on Opportunities, Quotes, or a custom object? Was it a dashboard, a scheduled report email, or both?
+This is a good one to time yourself on — building this report end-to-end from a blank org, without referencing your earlier build, is a reasonable proxy for interview whiteboard/live-build exercises.
 ## END TICKET
 
 ## TICKET
-TITLE: Day 10 (Agentforce): Build a "Quote Status Lookup" agent action
-LABELS: track:agentforce,area:cpq-integration,difficulty:intermediate,sprint:2
+TITLE: Day 10 (Agentforce): Build a "Quote Status Lookup" agent action — Meridian
+LABELS: track:agentforce,area:cpq-integration,difficulty:intermediate,sprint:alt-2
 BODY:
 ## Business Requirement
 Sales reps want to ask an internal agent "what's the status of the quote for [Account]?" and get a plain-English answer without opening the Quote record.
@@ -546,25 +545,25 @@ Sales reps want to ask an internal agent "what's the status of the quote for [Ac
 
 ## Acceptance Criteria
 - [ ] Topic correctly triggers only for quote-status-style questions
-- [ ] Action successfully retrieves live Quote data (not hardcoded)
+- [ ] Action successfully retrieves live Quote data
 - [ ] Agent responds sensibly when no Quote is found for the given Account
-- [ ] You can explain the difference between an agent Topic and an agent Action to someone unfamiliar with Agentforce
+- [ ] You can explain the difference between an agent Topic and an agent Action
 
 ## Test Scenarios
 1. Ask about an Account with an existing Quote — confirm correct status/amount returned.
-2. Ask about an Account with no Quote — confirm a graceful "not found" response, not a hallucinated answer.
-3. Ask an off-topic question (e.g. about weather) — confirm the agent doesn't attempt to answer using this Topic.
+2. Ask about an Account with no Quote — confirm a graceful "not found" response.
+3. Ask an off-topic question — confirm the agent doesn't attempt to answer using this Topic.
 
 ## Interview Prep
 "How would you connect an Agentforce agent to live CPQ data, and what guardrails would you put around it?"
 ## END TICKET
 
 ## TICKET
-TITLE: Day 10 (Agentforce): Guardrails for a pricing-sensitive agent Topic
-LABELS: track:agentforce,area:security,area:cpq-integration,difficulty:advanced,sprint:2
+TITLE: Day 10 (Agentforce): Guardrails for a pricing-sensitive agent Topic — Meridian
+LABELS: track:agentforce,area:security,area:cpq-integration,difficulty:advanced,sprint:alt-2
 BODY:
 ## Business Requirement
-Leadership is nervous about letting an agent anywhere near pricing/discounting — they want to allow read-only quote lookups (Day 10's first ticket) but explicitly prevent the agent from ever creating a discount, changing a price, or approving a quote.
+Leadership is nervous about letting an agent anywhere near pricing/discounting — they want to allow read-only quote lookups but explicitly prevent the agent from ever creating a discount, changing a price, or approving a quote.
 
 ## Skills Being Tested
 - Agentforce guardrails and permission scoping
@@ -580,7 +579,7 @@ Leadership is nervous about letting an agent anywhere near pricing/discounting �
 - [ ] No Action exposed to this agent can write to price, discount, or approval fields
 - [ ] The agent explicitly refuses discount/approval requests rather than staying silent or attempting a workaround
 - [ ] You've documented at least 2 adversarial phrasings you tried and how the agent responded
-- [ ] You can explain, in interview terms, the difference between "the agent won't do X because it wasn't given the tool" vs "the agent won't do X because it was instructed not to" — and why relying on both matters
+- [ ] You can explain the difference between "the agent won't do X because it wasn't given the tool" vs "the agent won't do X because it was instructed not to"
 
 ## Test Scenarios
 1. Directly ask the agent to "apply a 10% discount to this quote" — confirm refusal.

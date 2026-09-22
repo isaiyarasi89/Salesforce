@@ -1,0 +1,20 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "SBQQ__PriceCondition__c",
+                "referenceId": "SBQQ__PriceCondition__cRef1"
+            },
+            "Name": "0",
+            "SBQQ__Rule__c": "@SBQQ__PriceRule__cRef1"
+        },
+        {
+            "attributes": {
+                "type": "SBQQ__PriceCondition__c",
+                "referenceId": "SBQQ__PriceCondition__cRef2"
+            },
+            "Name": "1",
+            "SBQQ__Rule__c": "@SBQQ__PriceRule__cRef1"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "PricebookEntry",
+                "referenceId": "PricebookEntryRef1"
+            },
+            "Product2Id": "01td200000PneZ0AAJ",
+            "Pricebook2Id": "01sd200000HDr6LAAT",
+            "UnitPrice": 0,
+            "IsActive": true
+        }
+    ]
+}

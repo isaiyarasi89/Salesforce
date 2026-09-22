@@ -4,6 +4,8 @@
 #   - New TITLE in the .md  -> creates issue + adds to project board
 #   - Existing TITLE (exact match) -> updates that issue's body + labels
 #   - Nothing is ever duplicated
+#   - Any label used in the .md that doesn't exist in the repo yet
+#     is automatically created before being applied (no manual step)
 #
 # USAGE:
 #   1. Edit REPO below
@@ -24,6 +26,20 @@ fi
 
 WORKDIR=$(mktemp -d)
 trap 'rm -rf "$WORKDIR"' EXIT
+
+# ---- Ensure every label mentioned in this ticket exists before we use it ----
+# Takes a comma-separated label string, creates any that are missing.
+ensure_labels_exist() {
+  local labels_csv="$1"
+  local IFS=','
+  for label in $labels_csv; do
+    # trim leading/trailing whitespace
+    label="$(echo "$label" | sed 's/^ *//;s/ *$//')"
+    [ -z "$label" ] && continue
+    # gh label create fails harmlessly if it already exists - we just ignore that
+    gh label create "$label" --repo "$REPO" --color "0E8A16" >/dev/null 2>&1 || true
+  done
+}
 
 # ---- Parse the source file into one set of files per ticket ----
 awk -v dir="$WORKDIR" '
@@ -59,6 +75,11 @@ for i in $(seq 1 "$COUNT"); do
 
   if [ -z "$title" ]; then
     continue
+  fi
+
+  # Make sure every label this ticket needs actually exists in the repo first
+  if [ -n "$labels" ]; then
+    ensure_labels_exist "$labels"
   fi
 
   # Look for an existing issue with this EXACT title (open or closed)
