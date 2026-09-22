@@ -5,9 +5,9 @@
                 "type": "SBQQ__ProductOption__c",
                 "referenceId": "SBQQ__ProductOption__cRef1"
             },
-            "SBQQ__Feature__c": "a0hd200000WDmE5AAL",
-            "SBQQ__ConfiguredSKU__c": "01td200000PneZ0AAJ",
-            "SBQQ__OptionalSKU__c": "01td200000PpyF3AAJ",
+            "SBQQ__Feature__c": "@SBQQ__ProductFeature__cRef1",
+            "SBQQ__ConfiguredSKU__c": "@Product2Ref1",
+            "SBQQ__OptionalSKU__c": "@Product2Ref2",
             "SBQQ__Selected__c": false,
             "SBQQ__Required__c": false
         },
@@ -16,8 +16,8 @@
                 "type": "SBQQ__ProductOption__c",
                 "referenceId": "SBQQ__ProductOption__cRef2"
             },
-            "SBQQ__Feature__c": "a0hd200000WDmE5AAL",
-            "SBQQ__ConfiguredSKU__c": "01td200000PneZ0AAJ",
+            "SBQQ__Feature__c": "@SBQQ__ProductFeature__cRef1",
+            "SBQQ__ConfiguredSKU__c": "@Product2Ref1",
             "SBQQ__OptionalSKU__c": "01td200000PpyGfAAJ",
             "SBQQ__Selected__c": false,
             "SBQQ__Required__c": false
