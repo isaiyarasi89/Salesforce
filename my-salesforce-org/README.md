@@ -147,6 +147,94 @@ git push
 sf data import tree --plan data/priceRule/<generated>-plan.json --target-org mydevorg
 ```
 
+## Pulling product catalog changes (bundle, features, options, price book entries)
+
+This is a bigger, more interconnected export than a single Product Rule or Price Rule.
+A bundle is a cluster of related records: the parent Product2, its Features, each
+Feature's Options (each pointing to another Product2), and Price Book Entries for
+every product involved.
+
+**Step 1 — check whether Feature is a separate object or a field on Product Option.**
+In Setup → Object Manager, search for "Feature." If the Product2 record's Related
+list shows **Features** as its own section (separate from Configuration Attributes),
+it's a real related object, not just a field — this changes the query structure below.
+
+**Step 2 — confirm real field/relationship names before guessing.** Don't assume a
+field exists just because it sounds right (`SBQQ__Bundle__c`, `SBQQ__Active__c` were
+both wrong guesses in practice — the real "Active" field on Product2 turned out to be
+the **standard** field `IsActive`, not a custom CPQ field at all). Cross-check against
+what's actually visible on the record's Details page, and let query errors correct
+relationship-name guesses (the error message names the right one).
+
+**Step 3 — because SOQL subqueries only nest one level deep**, a Bundle → Feature →
+Option structure needs **two separate export queries**, not one combined query:
+
+```bash
+# Query 1 — the bundle and its Features:
+sf data export tree --query "SELECT Id, Name, IsActive, ProductCode, Family, (SELECT Id, Name FROM SBQQ__Features__r) FROM Product2 WHERE Name = 'Market Data Subscription'" --plan --output-dir data/productCatalog --target-org mydevorg
+
+# Query 2 — the Options, linked back to their Feature and the bundle:
+sf data export tree --query "SELECT Id, Name, SBQQ__Feature__c, SBQQ__ConfiguredSKU__c, SBQQ__OptionalSKU__c, SBQQ__Selected__c, SBQQ__Required__c FROM SBQQ__ProductOption__c WHERE SBQQ__ConfiguredSKU__r.Name = 'Market Data Subscription'" --plan --output-dir data/productCatalog --target-org mydevorg
+```
+
+**Step 4 — export Price Book Entries separately**, since pricing relates to Product2
+through Pricebook2 rather than nesting under the bundle query above:
+
+```bash
+sf data export tree --query "SELECT Id, Product2Id, Pricebook2Id, UnitPrice, IsActive FROM PricebookEntry WHERE Product2.Name IN ('Market Data Subscription','Option Product 1 Name','Option Product 2 Name')" --plan --output-dir data/productCatalog --target-org mydevorg
+```
+
+**Step 5 — commit everything together** (including any other pending exports, like a
+Price Rule, so a commit represents one coherent piece of config):
+
+```bash
+git add data/productCatalog data/priceRule
+git commit -m "Export Market Data bundle, features, options, price book entries, and price rule"
+git push
+git log --oneline -3   # confirm the commit landed
+```
+
+## Pulling additional pricing & contract data (⚠️ NOT YET VERIFIED)
+
+> The queries below use standard/likely CPQ field and relationship names, but unlike
+> everything above, **these haven't actually been run and confirmed against this org
+> yet.** Treat every field/relationship name here as a guess to be corrected by the
+> error message, exactly like we did earlier for `SBQQ__Bundle__c` and
+> `SBQQ__Active__c` turning out to be wrong. Update this note once each is confirmed
+> working.
+
+### Discount Schedules
+
+```bash
+sf data export tree --query "SELECT Id, Name, SBQQ__Type__c, (SELECT Id, SBQQ__LowerBound__c, SBQQ__UpperBound__c, SBQQ__Discount__c FROM SBQQ__Tiers__r) FROM SBQQ__DiscountSchedule__c WHERE Name = 'Your Discount Schedule Name'" --plan --output-dir data/discountSchedule --target-org mydevorg
+```
+
+### Contracted Pricing
+
+```bash
+sf data export tree --query "SELECT Id, Name, SBQQ__Account__c, SBQQ__Product__c, SBQQ__Price__c, SBQQ__StartDate__c, SBQQ__EndDate__c FROM SBQQ__ContractedPrice__c WHERE SBQQ__Product__r.Name = 'Your Product Name'" --plan --output-dir data/contractedPricing --target-org mydevorg
+```
+
+### Configuration Attributes
+
+```bash
+sf data export tree --query "SELECT Id, Name, SBQQ__Field__c, SBQQ__ConfiguredSKU__c FROM SBQQ__ConfigurationAttribute__c WHERE SBQQ__ConfiguredSKU__r.Name = 'Market Data Subscription'" --plan --output-dir data/configAttributes --target-org mydevorg
+```
+
+### Subscriptions
+
+```bash
+sf data export tree --query "SELECT Id, Name, SBQQ__Product__c, SBQQ__Quantity__c, SBQQ__SubscriptionStartDate__c, SBQQ__SubscriptionEndDate__c, SBQQ__Contract__c FROM SBQQ__Subscription__c WHERE SBQQ__Product__r.Name = 'Market Data Subscription'" --plan --output-dir data/subscriptions --target-org mydevorg
+```
+
+### Once each is confirmed, commit as usual:
+
+```bash
+git add data/discountSchedule data/contractedPricing data/configAttributes data/subscriptions
+git commit -m "Export discount schedules, contracted pricing, configuration attributes, and subscriptions"
+git push
+```
+
 ## Common errors and fixes
 
 | Error | Cause | Fix |
@@ -157,6 +245,7 @@ sf data import tree --plan data/priceRule/<generated>-plan.json --target-org myd
 | `Entity of type 'CustomField' named 'X' cannot be found` | Used object name where a field name was expected | Use `CustomObject:X` to pull the whole object instead |
 | `'C:\Program' is not recognized...` (Git Bash only) | Git Bash path-quoting quirk with `sf data` commands | Run the same command in PowerShell instead |
 | `could not add label: 'X' not found` (in `sync_github_tickets.sh`) | GitHub label doesn't exist yet | `gh label create "X"`, or use the auto-create version of the sync script |
+| `No such column 'X' on entity 'Product2'` | Guessed a field name that doesn't actually exist | Check the record's Details page for the real field name; standard fields (like Active → `IsActive`) don't have a `__c` suffix, custom fields do |
 
 ## Notes / gotchas
 
@@ -164,7 +253,6 @@ sf data import tree --plan data/priceRule/<generated>-plan.json --target-org myd
   commit real customer names, contracted prices, or production data this way.
 - Price Actions/Product Actions can reference other records (e.g. Product2) by lookup —
   importing into a *different* org can fail if that referenced record doesn't exist there.
-
 
 ## Use Agentforce Vibes to Build Lightning Apps
 
