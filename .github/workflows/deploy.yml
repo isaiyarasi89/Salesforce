@@ -1,0 +1,46 @@
+name: Deploy to Salesforce Org
+
+# Runs whenever main is updated. You can narrow this later (e.g. only when
+# force-app/ changes) once the basic flow is working.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli
+
+      - name: Write JWT key to a file
+        # GitHub Secrets can't be used as file paths directly, so we write
+        # the secret's contents out to a temp file the CLI can read.
+        run: echo "${{ secrets.SF_JWT_KEY }}" > server.key
+
+      - name: Authenticate to target org via JWT
+        run: |
+          sf org login jwt \
+            --client-id ${{ secrets.SF_CONSUMER_KEY }} \
+            --jwt-key-file server.key \
+            --username ${{ secrets.SF_USERNAME }} \
+            --instance-url https://tpicap-dev-ed.develop.my.salesforce.com \
+            --alias target-org \
+            --set-default
+
+      - name: Deploy metadata (dry run first)
+        # Validates the deploy without actually pushing changes - a safety
+        # check before the real deploy below. Remove this step once you
+        # trust the pipeline, or keep it permanently as a safeguard.
+        run: sf project deploy start --source-dir force-app --dry-run --target-org target-org
+
+      - name: Deploy metadata (real deploy)
+        run: sf project deploy start --source-dir force-app --target-org target-org
+
+      - name: Clean up JWT key file
+        if: always()
+        run: rm -f server.key
