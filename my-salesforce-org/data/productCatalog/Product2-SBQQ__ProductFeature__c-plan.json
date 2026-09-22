@@ -1,0 +1,14 @@
+[
+    {
+        "sobject": "Product2",
+        "files": [
+            "Product2.json"
+        ]
+    },
+    {
+        "sobject": "SBQQ__ProductFeature__c",
+        "files": [
+            "SBQQ__ProductFeature__c.json"
+        ]
+    }
+]

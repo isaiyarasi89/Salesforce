@@ -1,0 +1,14 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref1"
+            },
+            "Name": "Market Data Subscription",
+            "IsActive": true,
+            "ProductCode": "MDS-001",
+            "Family": "Market Data"
+        }
+    ]
+}
