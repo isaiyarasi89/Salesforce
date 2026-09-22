@@ -42,10 +42,10 @@ jobs:
         # Validates the deploy without actually pushing changes - a safety
         # check before the real deploy below. Remove this step once you
         # trust the pipeline, or keep it permanently as a safeguard.
-        run: sf project deploy start --source-dir force-app --dry-run --target-org target-org
+        run: sf project deploy start --source-dir cpq-app --dry-run --target-org target-org
 
       - name: Deploy metadata (real deploy)
-        run: sf project deploy start --source-dir force-app --target-org target-org
+        run: sf project deploy start --source-dir cpq-app --target-org target-org
 
       - name: Clean up JWT key file
         if: always()
