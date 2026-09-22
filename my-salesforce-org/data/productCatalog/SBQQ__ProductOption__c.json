@@ -5,7 +5,6 @@
                 "type": "SBQQ__ProductOption__c",
                 "referenceId": "SBQQ__ProductOption__cRef1"
             },
-            "Name": "PO-000084",
             "SBQQ__Feature__c": "a0hd200000WDmE5AAL",
             "SBQQ__ConfiguredSKU__c": "01td200000PneZ0AAJ",
             "SBQQ__OptionalSKU__c": "01td200000PpyF3AAJ",
@@ -17,7 +16,6 @@
                 "type": "SBQQ__ProductOption__c",
                 "referenceId": "SBQQ__ProductOption__cRef2"
             },
-            "Name": "PO-000085",
             "SBQQ__Feature__c": "a0hd200000WDmE5AAL",
             "SBQQ__ConfiguredSKU__c": "01td200000PneZ0AAJ",
             "SBQQ__OptionalSKU__c": "01td200000PpyGfAAJ",
