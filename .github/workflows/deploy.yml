@@ -54,7 +54,7 @@ jobs:
       # this — if they don't, just correct the path in the matching step.
 
       - name: "Stage 1 - Import Products and Features"
-        run: sf data import tree --plan data/productCatalog/Product2-plan.json --target-org target-org
+        run: sf data import tree --plan data/productCatalog/Product2-SBQQ__ProductFeature__c-plan.json --target-org target-org
 
       - name: "Stage 2 - Import Product Options"
         # Depends on Stage 1 - Options reference the Product2 records above.
