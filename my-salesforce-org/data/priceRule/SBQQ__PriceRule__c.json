@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "SBQQ__PriceRule__c",
+                "referenceId": "SBQQ__PriceRule__cRef1"
+            },
+            "Name": "Tier 1 Pricing",
+            "SBQQ__Active__c": true
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "sobject": "SBQQ__PriceRule__c",
+        "files": [
+            "SBQQ__PriceRule__c.json"
+        ]
+    },
+    {
+        "sobject": "SBQQ__PriceCondition__c",
+        "files": [
+            "SBQQ__PriceCondition__c.json"
+        ]
+    },
+    {
+        "sobject": "SBQQ__PriceAction__c",
+        "files": [
+            "SBQQ__PriceAction__c.json"
+        ]
+    }
+]
