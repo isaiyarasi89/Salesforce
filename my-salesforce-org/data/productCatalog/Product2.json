@@ -9,6 +9,15 @@
             "IsActive": true,
             "ProductCode": "MDS-001",
             "Family": "Market Data"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref2"
+            },
+            "Name": "Post-Trade Service",
+            "IsActive": true,
+            "ProductCode": "PTS001"
         }
     ]
 }
