@@ -3,10 +3,6 @@
     {
       "path": "cpq-app",
       "default": true
-    },
-    {
-      "path": "rlm-app",
-      "default": false
     }
   ],
   "namespace": "",
