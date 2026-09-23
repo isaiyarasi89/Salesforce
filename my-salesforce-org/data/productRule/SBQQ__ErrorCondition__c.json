@@ -5,14 +5,26 @@
                 "type": "SBQQ__ErrorCondition__c",
                 "referenceId": "SBQQ__ErrorCondition__cRef1"
             },
-            "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1"
+            "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1",
+            "SBQQ__FilterType__c": "Value",
+            "SBQQ__FilterValue__c": "APAC",
+            "SBQQ__Index__c": 1,
+            "SBQQ__Operator__c": "equals",
+            "SBQQ__TestedField__c": "Region__c",
+            "SBQQ__TestedObject__c": "Configuration Attributes"
         },
         {
             "attributes": {
                 "type": "SBQQ__ErrorCondition__c",
                 "referenceId": "SBQQ__ErrorCondition__cRef2"
             },
-            "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1"
+            "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1",
+            "SBQQ__FilterType__c": "Value",
+            "SBQQ__FilterValue__c": "PTS001",
+            "SBQQ__Index__c": 2,
+            "SBQQ__Operator__c": "equals",
+            "SBQQ__TestedField__c": "SBQQ__ProductCode__c",
+            "SBQQ__TestedObject__c": "Product Option"
         }
     ]
 }
