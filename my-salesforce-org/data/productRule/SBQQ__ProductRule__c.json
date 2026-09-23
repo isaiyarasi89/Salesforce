@@ -7,7 +7,11 @@
             },
             "Name": "Validate Post-Trade Service for APAC",
             "SBQQ__Type__c": "Validation",
-            "SBQQ__Active__c": false
+            "SBQQ__Active__c": false,
+            "SBQQ__ConditionsMet__c": "All",
+            "SBQQ__ErrorMessage__c": "Post-Trade Service cannot be selected for the APAC region",
+            "SBQQ__EvaluationEvent__c": "Save",
+            "SBQQ__Scope__c": "Product"
         }
     ]
 }
