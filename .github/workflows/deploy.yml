@@ -71,10 +71,10 @@ jobs:
         run: sf data import tree --plan data/productCatalog/plan.json --target-org target-org
 
       - name: "Stage 2 - Import Product Rules (+ Product Actions, Error Conditions)"
-        run: sf data import tree --plan data/productRule/SBQQ__ProductRule__c-plan.json --target-org target-org
+        run: sf data import tree --plan data/productRule/SBQQ__ProductRule__c.json --target-org target-org
 
       - name: "Stage 3 - Import Price Rules (+ Price Conditions, Price Actions)"
-        run: sf data import tree --plan data/priceRule/SBQQ__PriceRule__c-plan.json --target-org target-org
+        run: sf data import tree --plan data/priceRule/SBQQ__PriceRule__c.json --target-org target-org
 
       - name: Clean up JWT key file
         if: always()
