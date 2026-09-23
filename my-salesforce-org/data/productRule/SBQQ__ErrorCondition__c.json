@@ -5,7 +5,6 @@
                 "type": "SBQQ__ErrorCondition__c",
                 "referenceId": "SBQQ__ErrorCondition__cRef1"
             },
-            "Name": "000002",
             "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1"
         },
         {
@@ -13,7 +12,6 @@
                 "type": "SBQQ__ErrorCondition__c",
                 "referenceId": "SBQQ__ErrorCondition__cRef2"
             },
-            "Name": "000003",
             "SBQQ__Rule__c": "@SBQQ__ProductRule__cRef1"
         }
     ]
