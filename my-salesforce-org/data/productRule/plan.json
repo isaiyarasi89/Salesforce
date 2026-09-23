@@ -1,0 +1,14 @@
+[
+    {
+        "sobject": "SBQQ__ProductRule__c",
+        "files": [
+            "SBQQ__ProductRule__c.json"
+        ]
+    },
+    {
+        "sobject": "SBQQ__ErrorCondition__c",
+        "files": [
+            "SBQQ__ErrorCondition__c.json"
+        ]
+    }
+]

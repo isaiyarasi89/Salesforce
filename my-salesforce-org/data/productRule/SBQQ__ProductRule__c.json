@@ -1,0 +1,13 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "SBQQ__ProductRule__c",
+                "referenceId": "SBQQ__ProductRule__cRef1"
+            },
+            "Name": "Validate Post-Trade Service for APAC",
+            "SBQQ__Type__c": "Validation",
+            "SBQQ__Active__c": false
+        }
+    ]
+}
